@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Output files (generated reports - may contain sensitive data)
+/GMAIL-REPORT-*.md
+/GMAIL-REPORT-*.pdf
+*.pdf
+
+# Gmail OAuth credentials (never commit these)
+credentials.json
+token.json
+token.pickle
+*.key
+*.pem
+*.p12
+*.secret
+*.token
+
+# Environment variables
+.env
+.env.*
+
+# Keep templates (they are project files, not generated)
+!templates/*.md
+
+# Test files
+test_output/
+.pytest_cache/
+
+# OS
+Thumbs.db
+.DS_Store
