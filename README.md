@@ -37,13 +37,13 @@ This makes the project useful for personal productivity, executive assistance, f
 ### One-Command Install (macOS/Linux)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yourname/gmail-report-claude/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/michelbr84/gmail-report-claude/main/install.sh | bash
 ```
 
 ### Manual Install
 
 ```bash
-git clone https://github.com/yourname/gmail-report-claude.git
+git clone https://github.com/michelbr84/gmail-report-claude.git
 cd gmail-report-claude
 ./install.sh
 ```
