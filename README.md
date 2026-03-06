@@ -84,6 +84,8 @@ Open Claude Code and use these commands:
 | `/gmail custom --from 2026-03-01 --to 2026-03-06 --unread-only` | Custom report for unread only |
 | `/gmail custom --from 2026-03-01 --to 2026-03-06 --include-spam` | Custom report with Spam included |
 | `/gmail custom --from 2026-03-01 --to 2026-03-06 --all-received` | Include all received emails in the period |
+| `/gmail organize month` | Analyze unlabeled emails and suggest label taxonomy |
+| `/gmail suggest-labels month` | Alias for `/gmail organize` |
 | `/gmail report-pdf` | Generate a professional PDF report with charts and tables |
 
 ### Common Filters
@@ -105,6 +107,8 @@ Supported filters can be mixed depending on the skill:
 - `--category promotions`
 - `--sender someone@example.com`
 - `--has-attachments`
+- `--pdf` (generate PDF version of any report)
+- `--pt` (output report in Portuguese)
 
 ---
 
@@ -128,7 +132,8 @@ gmail-report-claude/
 │   ├── gmail-trends/                  # Trend lines across days, weeks, and months
 │   ├── gmail-custom/                  # Custom date-range reports with mixed filters
 │   ├── gmail-report-md/               # Markdown report generation
-│   └── gmail-report-pdf/              # Professional PDF report with charts
+│   ├── gmail-report-pdf/              # Professional PDF report with charts
+│   └── gmail-organize/               # Inbox organization advisor
 ├── agents/                            # Parallel subagents
 │   ├── gmail-volume-analysis.md       # Volume, spikes, seasonality
 │   ├── gmail-noise-analysis.md        # Spam, low-value mail, clutter patterns
@@ -141,12 +146,14 @@ gmail-report-claude/
 │   ├── sender_ranker.py               # Sender aggregation and ranking
 │   ├── trend_analyzer.py              # Time-series analysis
 │   ├── response_time_analyzer.py      # Reply latency estimation
+│   ├── organization_analyzer.py       # Inbox clustering and label suggestions
 │   └── generate_pdf_report.py         # PDF report generator
 ├── templates/                         # Report templates
 │   ├── summary.md                     # Executive summary template
 │   ├── monthly-report.md              # Monthly report template
 │   ├── yearly-report.md               # Yearly report template
-│   └── custom-report.md               # Custom date range template
+│   ├── custom-report.md               # Custom date range template
+│   └── organization-report.md         # Inbox organization report template
 ├── install.sh                         # One-command installer
 ├── uninstall.sh                       # Uninstaller
 ├── requirements.txt                   # Python dependencies
@@ -226,6 +233,14 @@ Measure how email is distributed across:
 - Custom Gmail labels
 - Inbox categories such as Primary, Promotions, Social, Updates, and Forums
 
+### Inbox Organization Advisor
+Analyze emails without useful labels and receive:
+
+- Suggested label taxonomy based on sender, domain, and content patterns
+- Gmail filter rules to auto-apply labels going forward
+- Organization score measuring current inbox structure quality
+- Support for `--pdf` and `--pt` (Portuguese) output
+
 ### Attachment Insights
 Report on attachment-heavy activity, large-file patterns, and periods with unusually high file traffic.
 
@@ -274,6 +289,7 @@ This skill suite is designed to answer prompts like:
 - **Sales Teams** — Analyze sender activity and follow-up consistency
 - **Recruiters** — Review candidate email volume and reply cadence
 - **Agencies** — Deliver Gmail reporting as a service to clients
+- **Inbox Organization** — Get a prescribed label taxonomy for a cluttered inbox
 
 ---
 
@@ -337,6 +353,7 @@ Possible offers:
 - Weekly inbox health report
 - Monthly executive Gmail summary
 - Spam and clutter audit
+- Inbox organization and label taxonomy advisory
 - Unread backlog cleanup report
 - Team response-time analysis
 - Custom date-range reporting for legal, finance, operations, or recruiting workflows
@@ -360,6 +377,7 @@ Contributions welcome. Suggested areas:
 - Improved response-time inference
 - More filters and report templates
 - Better PDF visualizations
+- Multilingual report output (Portuguese, Spanish, etc.)
 - Privacy-preserving reporting modes
 
 ---

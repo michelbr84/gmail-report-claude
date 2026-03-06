@@ -37,6 +37,8 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 | `/gmail response-time week` | Estimate reply behavior and response latency |
 | `/gmail trends year` | Compare activity across months over the year |
 | `/gmail custom --from YYYY-MM-DD --to YYYY-MM-DD` | Custom date range report |
+| `/gmail organize month` | Analyze unlabeled emails and suggest label taxonomy |
+| `/gmail suggest-labels month` | Alias for `/gmail organize` |
 | `/gmail report-pdf` | Generate a professional PDF report with charts and tables |
 
 ### Common Filters
@@ -48,6 +50,8 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 - `--sender someone@example.com`
 - `--has-attachments`
 - `--from YYYY-MM-DD` / `--to YYYY-MM-DD`
+- `--pdf` (generate PDF version)
+- `--pt` (output in Portuguese)
 
 ---
 
@@ -94,7 +98,7 @@ Launch these 5 subagents simultaneously:
 
 ---
 
-## Sub-Skills (14 Specialized Components)
+## Sub-Skills (15 Specialized Components)
 
 | # | Skill | Directory | Purpose |
 |---|-------|-----------|---------| 
@@ -104,7 +108,7 @@ Launch these 5 subagents simultaneously:
 | 4 | gmail-unread | `skills/gmail-unread/` | Unread-only filtering and analysis |
 | 5 | gmail-spam | `skills/gmail-spam/` | Spam inclusion/exclusion analysis |
 | 6 | gmail-senders | `skills/gmail-senders/` | Top senders and sender concentration |
-| 7 | gmail-labels | `skills/gmail-labels/` | Label distribution analysis |
+| 7 | gmail-labels | `skills/gmail-labels/` | Label distribution analysis (descriptive) |
 | 8 | gmail-categories | `skills/gmail-categories/` | Promotions/Social/Primary/etc. analysis |
 | 9 | gmail-attachments | `skills/gmail-attachments/` | Attachment volume and file pattern analysis |
 | 10 | gmail-response-time | `skills/gmail-response-time/` | Reply speed and follow-up behavior |
@@ -112,6 +116,7 @@ Launch these 5 subagents simultaneously:
 | 12 | gmail-custom | `skills/gmail-custom/` | Custom date-range reports with mixed filters |
 | 13 | gmail-report-md | `skills/gmail-report-md/` | Markdown report generation |
 | 14 | gmail-report-pdf | `skills/gmail-report-pdf/` | Professional PDF report with charts |
+| 15 | gmail-organize | `skills/gmail-organize/` | Inbox organization advisor (prescriptive) |
 
 ---
 
@@ -122,7 +127,7 @@ Launch these 5 subagents simultaneously:
 | gmail-volume-analysis | `agents/gmail-volume-analysis.md` | gmail-period, gmail-report |
 | gmail-noise-analysis | `agents/gmail-noise-analysis.md` | gmail-spam |
 | gmail-sender-analysis | `agents/gmail-sender-analysis.md` | gmail-senders |
-| gmail-organization-analysis | `agents/gmail-organization-analysis.md` | gmail-labels, gmail-categories |
+| gmail-organization-analysis | `agents/gmail-organization-analysis.md` | gmail-labels, gmail-categories, gmail-organize |
 | gmail-response-analysis | `agents/gmail-response-analysis.md` | gmail-response-time |
 
 ---
@@ -142,6 +147,7 @@ Launch these 5 subagents simultaneously:
 | `/gmail response-time` | `GMAIL-REPORT-RESPONSE-TIME.md` |
 | `/gmail trends` | `GMAIL-REPORT-TRENDS.md` |
 | `/gmail custom` | `GMAIL-REPORT-CUSTOM.md` |
+| `/gmail organize` | `GMAIL-REPORT-ORGANIZE.md` |
 | `/gmail report-pdf` | `GMAIL-REPORT.pdf` |
 
 ---
@@ -155,6 +161,7 @@ Launch these 5 subagents simultaneously:
 | `scripts/sender_ranker.py` | Sender aggregation, ranking, and concentration analysis |
 | `scripts/trend_analyzer.py` | Time-series analysis across periods |
 | `scripts/response_time_analyzer.py` | Reply latency estimation and follow-up tracking |
+| `scripts/organization_analyzer.py` | Inbox clustering, label suggestion, and organization score |
 | `scripts/generate_pdf_report.py` | Professional PDF report with charts, tables, and scoring |
 
 ### Script Usage
@@ -182,6 +189,7 @@ Templates in `templates/` provide consistent report structure:
 | `monthly-report.md` | Monthly report template |
 | `yearly-report.md` | Yearly report template |
 | `custom-report.md` | Custom date range template |
+| `organization-report.md` | Inbox organization advisor template |
 
 ---
 
@@ -221,7 +229,7 @@ Used when neither MCP nor credentials are available. Pass a previously exported 
 | `credentials.json` present, no MCP | Mode 2 — Python OAuth |
 | Exported file provided, no MCP/credentials | Mode 3 — Offline |
 
-> All 12 commands work in all three modes. Mode 1 is the default and requires no setup beyond the existing MCP connection.
+> All commands work in all three modes. Mode 1 is the default and requires no setup beyond the existing MCP connection.
 
 ---
 
@@ -266,6 +274,12 @@ Spam is excluded from the INBOX query by Gmail's API. Adding `--include-spam` ca
 
 # Custom date range with filters
 /gmail custom --from 2026-01-01 --to 2026-01-31 --include-spam --has-attachments
+
+# Suggest inbox labels
+/gmail organize month
+
+# Organization report in Portuguese as PDF
+/gmail organize month --pt --pdf
 
 # Generate PDF report
 /gmail report-pdf

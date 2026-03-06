@@ -28,6 +28,7 @@ env/
 
 # Output files (generated reports - may contain sensitive data)
 /GMAIL-REPORT-*.md
+GMAIL-REPORT-ORGANIZE.md
 /GMAIL-REPORT-*.pdf
 *.pdf
 
