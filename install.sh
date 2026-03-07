@@ -231,6 +231,7 @@ main() {
     [ -f "$INSTALL_DIR/SKILL.md" ] && print_success "Main skill file" || { print_error "Main skill file missing"; VERIFY_OK=false; }
     [ -d "$SKILLS_DIR/gmail-report" ] && print_success "gmail-report sub-skill" || { print_error "gmail-report sub-skill missing"; VERIFY_OK=false; }
     [ -d "$SKILLS_DIR/gmail-summary" ] && print_success "gmail-summary sub-skill" || { print_error "gmail-summary sub-skill missing"; VERIFY_OK=false; }
+    [ -d "$SKILLS_DIR/gmail-organize" ] && print_success "gmail-organize sub-skill" || { print_error "gmail-organize sub-skill missing"; VERIFY_OK=false; }
     [ "$(ls "$AGENTS_DIR"/gmail-*.md 2>/dev/null | wc -l)" -gt 0 ] && print_success "Agent files" || { print_error "Agent files missing"; VERIFY_OK=false; }
     [ -d "$INSTALL_DIR/scripts" ] && print_success "Utility scripts" || { print_error "Scripts missing"; VERIFY_OK=false; }
     [ -d "$INSTALL_DIR/templates" ] && print_success "Report templates" || { print_error "Report templates missing"; VERIFY_OK=false; }
@@ -266,6 +267,7 @@ main() {
     echo "    /gmail response-time <period>   Reply speed and follow-up behavior"
     echo "    /gmail trends <period>          Activity trends over time"
     echo "    /gmail custom --from --to       Custom date range with filters"
+    echo "    /gmail organize <period>        Suggest labels for unlabeled emails"
     echo "    /gmail report-pdf               Generate PDF report with charts"
     echo ""
     echo -e "${BLUE}Common Filters:${NC}"
@@ -274,6 +276,8 @@ main() {
     echo "    --label \"Work\"    Filter by Gmail label"
     echo "    --sender <email>  Filter by sender"
     echo "    --has-attachments  Only messages with attachments"
+    echo "    --pdf             Generate PDF version"
+    echo "    --pt              Output in Portuguese"
     echo ""
     echo "  Documentation: https://github.com/yourname/gmail-report-claude"
     echo ""
